@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel, validator, root_validator
+from pydantic import BaseModel, root_validator, validator
 
 
 class ReservationBase(BaseModel):
@@ -8,7 +8,7 @@ class ReservationBase(BaseModel):
     to_reserve: datetime
 
 
-class MeetingRoomUpdate(ReservationBase):
+class ReservationUpdate(ReservationBase):
     pass
 
     @validator('from_reserve')
@@ -30,11 +30,11 @@ class MeetingRoomUpdate(ReservationBase):
         return values
 
 
-class ReservationCreate(MeetingRoomUpdate):
+class ReservationCreate(ReservationUpdate):
     meetingroom_id: int
 
 
-class MeetingRoomDB(ReservationBase):
+class ReservationDB(ReservationBase):
     id: int
     meetingroom_id: int
 
